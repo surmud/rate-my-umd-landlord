@@ -7,22 +7,6 @@ def index():
 
     return render_template('index.html')
 
-@app.route('/users/<username>')
-def user(username):
-    return render_template('index.html')
-
-
-@app.route('/login')
-def login():
-
-    return render_template('index.html')
-
-
-@app.route('/register')
-def register():
-
-    return render_template('index.html')
-
 
 @app.route('/landlords/<landlord_name>')
 def landlord(landlord_name):
