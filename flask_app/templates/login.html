@@ -1,0 +1,34 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h2>Log In</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+      <h2> Don't have an account? Click the link to register an account. </h2>
+        <a href="{{ url_for('register') }}"> Register </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+      {% if current_user.is_authenticated %}
+        <h1> Welcome {{ current_user.username }}! </h1>
+      {% if not current_user.is_authenticated %}
+        <h2> Try entering your username and password again. </h2>
+        {# Login form rendered here with Bootstrap classes #}
+    </div>
+    <form>
+      <div class="form-group">
+        <label for="exampleUsername">Password</label>
+        <input type="password" class="form-control" id="exampleUsername">
+      </div>
+      <div class="form-group">
+        <label for="examplePassword">Password</label>
+        <input type="password" class="form-control" id="examplePassword">
+      </div>
+      <button type="submit" class="btn btn-primary">Register Now</button>
+    </form>
+</div>
+{% endblock %}
