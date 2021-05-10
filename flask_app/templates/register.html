@@ -21,22 +21,56 @@
         <h2> Try entering your username and password again. </h2>
         {%endif %}
     </div>
-    <form>
+    <form action="" method="post">
+      {{ form.csrf_token }}
       <div class="form-group">
-        <label for="example@email.com">Email address</label>
-        <input type="email" class="form-control" id="example@email.com" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">You're email will never be shared.</small>
+          {{ form.username.label(class="form-control-label") }}
+          {{ form.username(class="form-control form-control-lg") }}
+          {% if form.username.errors %}
+          <div class="alert alert-warning" role="alert">
+              {% for error in form.username.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% endif %}
       </div>
       <div class="form-group">
-        <label for="exampleUsername">Password</label>
-        <input type="password" class="form-control" id="exampleUsername">
+          {{ form.email.label(class="form-control-label") }}
+          {{ form.email(class="form-control form-control-lg") }}
+          {% if form.email.errors %}
+          <div class="alert alert-warning" role="alert">
+              {% for error in form.email.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% endif %}
       </div>
       <div class="form-group">
-        <label for="examplePassword">Password</label>
-        <input type="password" class="form-control" id="examplePassword">
+          {{ form.password.label(class="form-control-label") }}
+          {{ form.password(class="form-control form-control-lg") }}
+          {% if form.password.errors %}
+          <div class="alert alert-warning" role="alert">
+              {% for error in form.password.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% endif %}
       </div>
-      <button type="submit" class="btn btn-primary">Register Now</button>
-    </form>
+      <div class="form-group">
+          {{ form.confirm_password.label(class="form-control-label") }}
+          {{ form.confirm_password(class="form-control form-control-lg") }}
+          {% if form.confirm_password.errors %}
+          <div class="alert alert-warning" role="alert">
+              {% for error in form.confirm_password.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% endif %}
+      </div>
+      <div class="form-group">
+          {{ form.submit(class="form-control form-control-lg") }}
+      </div>
+  </form>
 </div>
 
 {% endblock %}

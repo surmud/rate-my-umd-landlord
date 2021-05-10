@@ -26,26 +26,28 @@ def account(username):
     return render_template('account.html', username_form=username_form, password_form=password_form)
 
 
-@users.route('/login')
+@users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     
     form = LoginForm()
+    errors = ""
     if form.validate_on_submit():
         user = User.objects(username=form.username.data).first()
-
+        print("entering form validation")
         if user is not None and bcrypt.check_password_hash(user.password, form.password.data):
+            print("here")
             login_user(user)
-            return redirect(url_for('users.account'))
+            return redirect(url_for('users.account', username=form.username.data))
         else:
             flash("Login Failed. Make sure you entered the right username/password")
-            return redirect(url_for("users.login"))
+            errors = "Login Failed. Make sure you entered the right username/password"
+            print("errors is being updated to ", errors)
+    return render_template('login.html', form=form, errors=errors)
 
-    return render_template('login.html', form=form)
 
-
-@users.route('/register')
+@users.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for("index"))
@@ -60,3 +62,9 @@ def register():
 
 
     return render_template('register.html', form=form)
+
+@users.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('landlords.index'))
