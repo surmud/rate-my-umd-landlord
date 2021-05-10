@@ -17,6 +17,18 @@ class MovieReviewForm(FlaskForm):
     except ValidationError as err:
         err_msg = str(err)
 
+
+class LandlordReviewForm(FlaskForm):
+    try:
+        name = StringField("Enter Your Name:", validators=[InputRequired(), Length(min=1, max = 50)])
+        landlordName = StringField("Enter Your Landlord's Name:", validators=[InputRequired(), Length(min=1, max = 50)])
+        address = StringField("Enter The Adress of the Place You Lived:", validators=[InputRequired(), Length(min=1, max = 100)])
+        landlordReview = TextAreaField("How was your landlord?", validators=[InputRequired(), Length(min=1, max = 500)])
+        propertyReview = TextAreaField("How was the property?", validators=[InputRequired(), Length(min=1, max = 500)])
+        submit = SubmitField("Submit")
+    except ValidationError as err:
+        err_msg = str(err)
+
 class RegisterForm(FlaskForm):
     username = StringField("Enter a username:", validators=[InputRequired(), Length(min=1, max=32)])
     email = StringField("Enter your email:", validators=[InputRequired(), Email()])

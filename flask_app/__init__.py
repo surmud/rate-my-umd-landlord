@@ -22,12 +22,10 @@ bcrypt = Bcrypt()
 
 from .routes import main
 from .users.routes import users
-from .movies.routes import movies
-
+from .landlords.routes import landlords
 
 def page_not_found(e):
     return render_template("404.html"), 404
-
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -42,7 +40,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(main)
     app.register_blueprint(users)
-    app.register_blueprint(movies)
+    app.register_blueprint(landlords)
     app.register_error_handler(404, page_not_found)
 
     login_manager.login_view = "users.login"
