@@ -1,6 +1,7 @@
 {% extends "header.html" %}
 {% block content %}
 
+
 <div class="jumbotron">
     <h1 class="display-4">Welcome to Rate My UMD Landlord!</h1>
     <p class="lead">This is a website that allows you to rate your landlord from College Park, MD.</p>
@@ -9,7 +10,11 @@
     <p>To leave a review, go ahead and register with us.</p>
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
+      <p>Already have an account? Log in below to get started! </p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.login') }}" role="button">Log In</a>
     </p>
+    
+   
     {%else %}
     <p>Welcome back {{current_user.username}}. Go ahead and leave a review below.</p>
     {%endif%}
@@ -18,21 +23,70 @@
 
 
 
+<section>
+  <style>
+    hr {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border: 0;
+      border-top: 7px solid rgba(7, 0, 0, 0.1);
+      padding-top: 0%;
+      padding-bottom: 0%;
+    }
+  
+  #container { 
+      display: flex;
+      background-color:
+      I#f9f9f969;
+      border-radius: 10px;
+      width: 100%;
+      height: 120px;
+      flex-direction: row;
+      align-content: center;
+  }
+  #landlord {
+      font-family: Arial, Helvetica, sans-serif;
+      padding-left: 0%;
+      padding-top: 0%;
+      align-items: center;
+      flex-direction: column;
+      width: 220px;
+      height: 100px;
+  }
+  #review {
+      font-family: Arial, Helvetica, sans-serif;
+      padding-top: 0%;
+      padding-right: 10%;
+      padding-left : 10%;
+      display: flex;
+      align-items: left;
+      justify-content: left;
+      width: 500px;
+      height: 100px;
+  
+  }
+  
 
-  <h2>Recent Reviews</h2>
+  
+  </style>
+  <h2>Recent Landlord Reviews</h2>
+  <hr>
   {%for review in reviews%}
   <div class="media">
-    
-    
     <div class="media-body">
-      <h4 class="mt-0 mb-1 font-weight-bold">{{review.landlord_name}}</h4>
-      <h6 class="mt-0">Location: {{review.location}} </h6>
-      <h6 class="mt-0">Rating: {{review.rating}}/5</h6>
-      <h6 class="mt-0">Posted on 5/11/2021 by: {{review.author}}</h6>
-      <i>{{review.review_content}}</i>
+      <div id = "container">
+        <div id = "landlord">
+          <h3>{{review.landlord_name}}</h3>
+          <p>Location: {{review.location}} <br> Rating: {{review.rating}}/5 <br> Posted By: {{review.author}}</p>
+        </div>
+        <div id ="review">
+          <p> <i>{{review.review_content}}</i>
+        </div>
+      </div>
       
     </div>
   </div>
+  <hr>
   <br>
   {%endfor%}
   {% if current_user.is_authenticated %}
@@ -113,5 +167,9 @@
     </div>
     <!-- <button type="submit" class="btn btn-primary">Register Now</button> -->
   </form>
+</section>
+
+
+
 {%endif%}
 {% endblock %}
