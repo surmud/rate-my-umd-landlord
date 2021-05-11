@@ -21,10 +21,11 @@ def index():
         review.save()
         return redirect(request.path)
   
-
-
-    
     return render_template("index.html", form = form, current_user = current_user, reviews = reviews)
+
+    #TODO:
+    #fix bug that occurs when entering multiple reviews for same landlord
+    #add password requirements as discussed in specifications
 
 
 @landlords.route('/landlords/<landlord_name>', methods = ["GET", "POST"])
@@ -34,3 +35,9 @@ def landlord(landlord_name):
     #show a form that lets the user rate the current landlord
     return render_template('landlord.html')
 
+
+@landlords.route('/about', methods = ["GET", "POST"])
+def about():
+    form = LandlordReviewForm()
+ 
+    return render_template('about.html')
