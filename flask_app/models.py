@@ -18,3 +18,11 @@ class User(db.Document, UserMixin):
     # Returns unique string identifying our object
     def get_id(self):
         return self.username
+
+class LandlordReview(db.Document, UserMixin):
+    author = db.StringField(required=True)
+    landlord_name = db.StringField(required=True)
+    location = db.StringField(required=True)
+    rating = db.IntField()
+    review_content = db.StringField(required=True)
+    

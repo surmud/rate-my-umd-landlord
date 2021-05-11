@@ -1,6 +1,6 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField
+from wtforms import StringField, TextAreaField, PasswordField, IntegerField
 from wtforms.fields.simple import SubmitField
 from wtforms.validators import InputRequired, Length, NumberRange, length, ValidationError, Email, EqualTo
 from .models import User
@@ -9,25 +9,18 @@ class SearchForm(FlaskForm):
     search_query = StringField("Name:", validators=[InputRequired(), Length(min=1, max = 30)])
     submit = SubmitField("Submit")
 
-class MovieReviewForm(FlaskForm):
-    try:
-        name = StringField("Enter Your Name:", validators=[InputRequired(), Length(min=1, max = 50)])
-        text = TextAreaField("Type your review:", validators=[InputRequired(), Length(min=1, max = 500)])
-        submit = SubmitField("Submit")
-    except ValidationError as err:
-        err_msg = str(err)
-
 
 class LandlordReviewForm(FlaskForm):
     try:
         name = StringField("Enter Your Name:", validators=[InputRequired(), Length(min=1, max = 50)])
         landlordName = StringField("Enter Your Landlord's Name:", validators=[InputRequired(), Length(min=1, max = 50)])
-        address = StringField("Enter The Adress of the Place You Lived:", validators=[InputRequired(), Length(min=1, max = 100)])
-        landlordReview = TextAreaField("How was your landlord?", validators=[InputRequired(), Length(min=1, max = 500)])
-        propertyReview = TextAreaField("How was the property?", validators=[InputRequired(), Length(min=1, max = 500)])
+        address = StringField("Enter The Location of the Place You Lived:", validators=[InputRequired(), Length(min=1, max = 100)])
+        landlordReview = TextAreaField("How Was Your Landlord?", validators=[InputRequired(), Length(min=1, max = 500)])
+        rating = IntegerField("Give Them A Rating (1-5)", validators = [NumberRange(min=1, max=5)])
         submit = SubmitField("Submit")
     except ValidationError as err:
         err_msg = str(err)
+        print(err_msg)
 
 class RegisterForm(FlaskForm):
     username = StringField("Enter a username:", validators=[InputRequired(), Length(min=1, max=32)])

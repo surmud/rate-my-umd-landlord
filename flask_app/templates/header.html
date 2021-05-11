@@ -12,15 +12,16 @@
         <ul class="navbar-nav ml-auto">
             {% if current_user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('account') }}">
+                <a class="nav-link" href="{{ url_for('landlords.index')}}">
                     Account
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('logout') }}">
+                <a class="nav-link" href="{{ url_for('users.logout') }}">
                     Logout
                 </a>
             </li>
+
             {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('users.login') }}">
@@ -32,7 +33,13 @@
                     Register
                 </a>
             </li>
+
             {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('landlords.index') }}">
+                    About
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

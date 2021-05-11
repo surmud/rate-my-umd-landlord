@@ -3,23 +3,115 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Welcome to Rate My UMD Landlord!</h1>
-    <p class="lead">This is a website that allows you to rate your UMD landlord.</p>
+    <p class="lead">This is a website that allows you to rate your landlord from College Park, MD.</p>
     <hr class="my-4">
-    <p>To get started, go ahead and register with us.</p>
+    {% if not current_user.is_authenticated %}
+    <p>To leave a review, go ahead and register with us.</p>
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
     </p>
+    {%else %}
+    <p>Welcome back {{current_user.username}}. Go ahead and leave a review below.</p>
+    {%endif%}
   </div>
 
+
+
+
+
+  <h2>Recent Reviews</h2>
+  {%for review in reviews%}
   <div class="media">
     
+    
     <div class="media-body">
-      <h4 class="mt-0">Sample Review</h4>
-      <h6 class="mt-0">Location</h6>
-      <h6 class="mt-0">Landlord Name</h6>
-      Review Content, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+      <h4 class="mt-0 mb-1 font-weight-bold">{{review.landlord_name}}</h4>
+      <h6 class="mt-0">Location: {{review.location}} </h6>
+      <h6 class="mt-0">Rating: {{review.rating}}/5</h6>
+      <h6 class="mt-0">Posted on 5/11/2021 by: {{review.author}}</h6>
+      <i>{{review.review_content}}</i>
+      
     </div>
   </div>
-
-
+  <br>
+  {%endfor%}
+  {% if current_user.is_authenticated %}
+  <h3>Leave Your Review</h3>
+  <form action="" method="POST">
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.landlordName.label(class="form-control-label green-text") }}
+      {{ form.landlordName(class="form-control form-control-md") }}
+  
+      {% if form.landlordName.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.landlordName.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.name.label(class="form-control-label") }}
+      {{ form.name(class="form-control form-control-lg") }}
+  
+      {% if form.name.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.password.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.address.label(class="form-control-label green-text") }}
+      {{ form.address(class="form-control form-control-md") }}
+  
+      {% if form.address.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.address.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.landlordReview.label(class="form-control-label green-text") }}
+      {{ form.landlordReview(class="form-control form-control-md") }}
+  
+      {% if form.landlordReview.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.landlordReview.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  
+    <div class="form-group">
+      {{ form.rating.label(class="form-control-label green-text") }}
+      {{ form.rating(class="form-control form-control-md") }}
+  
+      {% if form.rating.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.rating.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  
+  
+  
+    {% if errors|length > 0 %}
+    <div class="alert alert-warning" role="alert">
+      {{ errors }}
+    </div>
+    {% endif %}
+    <div class="form-group">
+      {{ form.submit(class="form-control form-control-lg") }}
+    </div>
+    <!-- <button type="submit" class="btn btn-primary">Register Now</button> -->
+  </form>
+{%endif%}
 {% endblock %}
