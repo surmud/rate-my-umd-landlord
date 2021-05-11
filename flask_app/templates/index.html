@@ -1,9 +1,15 @@
 {% extends "header.html" %}
 {% block content %}
 
-<h3>Welcome to Rate My Landlord UMD</h3>
-
-<h4>This page should include all of the information about our landlords. Show a list of landlords and their reviews</h4>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Rate My UMD Landlord!</h1>
+    <p class="lead">This is a website that allows you to rate your UMD landlord.</p>
+    <hr class="my-4">
+    <p>To get started, go ahead and register with us.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
+    </p>
+  </div>
 
 
 

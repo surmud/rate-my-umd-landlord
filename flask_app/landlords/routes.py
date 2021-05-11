@@ -9,9 +9,7 @@ landlords = Blueprint("landlords", __name__)
 def index():
     form = LandlordReviewForm()
 
-    #if form.validate_on_submit():
-    #    return redirect(url_for("movies.query_results", query=form.search_query.data))
-
+    
     return render_template("index.html", form = form)
 
 

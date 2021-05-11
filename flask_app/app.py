@@ -1,17 +1,8 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-
-    return render_template('index.html')
+#app = Flask(__name__)
 
 
-@app.route('/landlords/<landlord_name>')
-def landlord(landlord_name):
-
-    return render_template('index.html')
 
 """
 Homepage (Surmud): Maybe show a list of recent reviews. Show the login button, register button. 
