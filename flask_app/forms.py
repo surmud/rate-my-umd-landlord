@@ -13,10 +13,10 @@ class SearchForm(FlaskForm):
 #This form lets the user review a landlord from the homepage
 class LandlordReviewForm(FlaskForm):
     try:
-        name = StringField("Enter Your Name:", validators=[InputRequired(), Length(min=1, max = 50)])
+        name = StringField("Enter Your Name, or type \"Anonymous\": ", validators=[InputRequired(), Length(min=1, max = 50)])
         landlordName = StringField("Enter Your Landlord's Name:", validators=[InputRequired(), Length(min=1, max = 50)])
         address = StringField("Enter The Location of the Place You Lived:", validators=[InputRequired(), Length(min=1, max = 100)])
-        landlordReview = TextAreaField("How Was Your Landlord?", validators=[InputRequired(), Length(min=1, max = 500)])
+        landlordReview = TextAreaField("How Was Your Landlord? Write a detailed review below", validators=[InputRequired(), Length(min=1, max = 500)])
         rating = IntegerField("Give Them A Rating (1-5)", validators = [NumberRange(min=1, max=5)])
         submit = SubmitField("Submit")
     except ValidationError as err:

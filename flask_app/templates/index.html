@@ -4,7 +4,7 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Welcome to Rate My UMD Landlord!</h1>
-    <p class="lead">This is a website that allows you to rate and review your landlord from College Park, home of the University of Maryland.</p>
+    <p class="lead">This is a website that allows you to rate and review landlords from College Park, home of the University of Maryland.</p>
     <hr class="my-4">
     {% if not current_user.is_authenticated %}
     <p style="font-size:18px;">To leave a review, go ahead and register with us.</p>
@@ -16,7 +16,7 @@
     
    
     {%else %}
-    <p>Welcome back! Go ahead and leave a review below.</p>
+    <p>Welcome back, you are logged in! Go ahead and leave a review below.</p>
     {%endif%}
   </div>
 
@@ -108,8 +108,8 @@
       {% endif %}
     </div>
     <div class="form-group">
-      {{ form.name.label(class="form-control-label") }}
-      {{ form.name(class="form-control form-control-lg") }}
+      {{ form.name.label(class="form-control-label green-text") }}
+      {{ form.name(class="form-control form-control-md") }}
   
       {% if form.name.errors %}
       <div class="alert alert-warning" role="alert">

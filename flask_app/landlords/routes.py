@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 from ..forms import LandlordReviewForm, CurrentLandlordReviewForm
 from ..models import LandlordReview
 from flask_login import current_user, login_required, login_user, logout_user
+import numpy as np #use np to find unique values of list
 
 landlords = Blueprint("landlords", __name__)
 
@@ -23,11 +24,6 @@ def index():
         return redirect(request.path)
   
     return render_template("index.html", form = form, current_user = current_user, reviews = reviews)
-
-    #TODO:
-    #fix bug that occurs when entering multiple reviews for same landlord
-    #add password requirements as discussed in specifications
-
 
 @landlords.route('/landlords/<landlord_id>', methods = ["GET", "POST"])
 def landlord(landlord_id):
@@ -54,11 +50,35 @@ def landlord(landlord_id):
 
     return render_template("landlord.html", reviews=reviews, landlord_name = landlord_name, form = form, current_user = current_user)
 
+#display a list of all of the landlords in the database
+@landlords.route('/landlords', methods = ["GET", "POST"])
+def landlords_index():
+
+    reviews = LandlordReview.objects()
+    landlord_ids = []
+    landlord_names = []
+    
+    for review in reviews:
+        landlord_ids.append(review.landlord_id)
+        landlord_names.append(review.landlord_name)
+
+    landlord_ids = list(np.unique(landlord_ids))
+    landlord_names = list(np.unique(landlord_names))
+
+    landlords = []
+    for i in range(len(landlord_ids)):
+        landlords.append((landlord_names[i], landlord_ids[i]))
+
+
+    #for each id, get all the review ratings for that id
+
+    return render_template("landlords_index.html", landlords=landlords,  current_user = current_user)
 
 @landlords.route('/about', methods = ["GET", "POST"])
 def about():
     form = LandlordReviewForm()
  
     return render_template('about.html')
+
 
 

@@ -7,6 +7,10 @@ from ..models import User
 
 users = Blueprint("users", __name__)
 
+#TODO:
+#add more strict password requirements as discussed in specifications
+#account html template has to to be fixed, only want to let them change their password or username
+
 @users.route('/users/<username>')
 def account(username):
     username_form = UpdateUsernameForm()

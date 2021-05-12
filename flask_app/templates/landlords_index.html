@@ -1,0 +1,11 @@
+{% extends "header.html" %}
+{% block content %}
+<h3>Landlords Index</h3>
+<p class="lead">This is a comprehensive list of all landlords in our database. Click on a landlord's name to see all of their reviews!</p>
+{%for name, id in landlords%}
+<hr>
+<a href="{{ url_for('landlords.landlord', landlord_id = id) }}" ><h4>{{name}}</h4></a>
+{%endfor%}
+
+
+{% endblock content %}
