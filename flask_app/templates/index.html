@@ -4,7 +4,7 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Welcome to Rate My UMD Landlord!</h1>
-    <p class="lead">This is a website that allows you to rate your landlord from College Park, MD.</p>
+    <p class="lead">This is a website that allows you to rate and review your landlord from College Park, home of the University of Maryland.</p>
     <hr class="my-4">
     {% if not current_user.is_authenticated %}
     <p style="font-size:18px;">To leave a review, go ahead and register with us.</p>
@@ -16,7 +16,7 @@
     
    
     {%else %}
-    <p>Welcome back {{current_user.username}}. Go ahead and leave a review below.</p>
+    <p>Welcome back! Go ahead and leave a review below.</p>
     {%endif%}
   </div>
 

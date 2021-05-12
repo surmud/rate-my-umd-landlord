@@ -22,21 +22,9 @@
 <br>
 {%endfor%}
 {% if current_user.is_authenticated %}
-<h3>Leave Your Review</h3>
+<h3>Leave Your Review for {{landlord_name}}!</h3>
 <form action="" method="POST">
   {{form.csrf_token }}
-  <div class="form-group">
-    {{ form.landlordName.label(class="form-control-label green-text") }}
-    {{ form.landlordName(class="form-control form-control-md") }}
-
-    {% if form.landlordName.errors %}
-    <div class="alert alert-warning" role="alert">
-      {% for error in form.landlordName.errors %}
-      <span>{{ error }}</span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
   <div class="form-group">
     {{ form.name.label(class="form-control-label") }}
     {{ form.name(class="form-control form-control-lg") }}
@@ -101,7 +89,11 @@
 </form>
 </section>
 
-
-
+{%else%}
+<p style="font-size:18px;">Want to leave your review for {{landlord_name}}? Log in below to get started! </p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.login') }}" role="button">Log In</a>
+      <hr>
+      <p style="font-size:18px;">Don't have an account yet? Just register below!</p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
 {%endif%}
 {% endblock content %}

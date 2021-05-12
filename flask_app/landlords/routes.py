@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect, request, flash
-from ..forms import LandlordReviewForm
+from ..forms import LandlordReviewForm, CurrentLandlordReviewForm
 from ..models import LandlordReview
 from flask_login import current_user, login_required, login_user, logout_user
 
@@ -32,18 +32,27 @@ def index():
 @landlords.route('/landlords/<landlord_id>', methods = ["GET", "POST"])
 def landlord(landlord_id):
 
-    form = LandlordReviewForm()
+    form = CurrentLandlordReviewForm()
     #if landlord_name not in database, display a message
     if not LandlordReview.objects(landlord_id = landlord_id):
         return render_template("index.html")
     
-    #get the name of the landlord somehow
-
     reviews = LandlordReview.objects(landlord_id=landlord_id)
     review = reviews.first()
     landlord_name = review.landlord_name
+    if form.validate_on_submit():
+        review = LandlordReview(
+            author = form.name.data,
+            landlord_name = landlord_name,
+            location = form.address.data,
+            rating = form.rating.data,
+            review_content = form.landlordReview.data,
+            landlord_id = form.landlordName.data.replace(" ", ""))
 
-    return render_template("landlord.html", reviews=reviews, landlord_name = landlord_name, form = form)
+        review.save()
+        return redirect(request.path)
+
+    return render_template("landlord.html", reviews=reviews, landlord_name = landlord_name, form = form, current_user = current_user)
 
 
 @landlords.route('/about', methods = ["GET", "POST"])
