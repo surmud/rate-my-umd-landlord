@@ -7,10 +7,10 @@
     <p class="lead">This is a website that allows you to rate your landlord from College Park, MD.</p>
     <hr class="my-4">
     {% if not current_user.is_authenticated %}
-    <p>To leave a review, go ahead and register with us.</p>
+    <p style="font-size:18px;">To leave a review, go ahead and register with us.</p>
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
-      <p>Already have an account? Log in below to get started! </p>
+      <p style="font-size:18px;">Already have an account? Log in below to get started! </p>
       <a class="btn btn-primary btn-lg" href="{{ url_for('users.login') }}" role="button">Log In</a>
     </p>
     
@@ -76,7 +76,9 @@
     <div class="media-body">
       <div id = "container">
         <div id = "landlord">
-          <h3>{{review.landlord_name}}</h3>
+          
+          <a href="{{ url_for('landlords.landlord', landlord_id = review.landlord_id) }}" ><h3>{{review.landlord_name}}</h3></a>
+          
           <p>Location: {{review.location}} <br> Rating: {{review.rating}}/5 <br> Posted By: {{review.author}}</p>
         </div>
         <div id ="review">

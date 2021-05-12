@@ -23,6 +23,7 @@ class LandlordReview(db.Document, UserMixin):
     author = db.StringField(required=True)
     landlord_name = db.StringField(required=True)
     location = db.StringField(required=True)
-    rating = db.IntField()
+    rating = db.IntField(required=True)
     review_content = db.StringField(required=True)
+    landlord_id = db.StringField(required=True)
     

@@ -16,7 +16,8 @@ def index():
             landlord_name = form.landlordName.data,
             location = form.address.data,
             rating = form.rating.data,
-            review_content = form.landlordReview.data)
+            review_content = form.landlordReview.data,
+            landlord_id = form.landlordName.data.replace(" ", ""))
 
         review.save()
         return redirect(request.path)
@@ -28,12 +29,21 @@ def index():
     #add password requirements as discussed in specifications
 
 
-@landlords.route('/landlords/<landlord_name>', methods = ["GET", "POST"])
-def landlord(landlord_name):
+@landlords.route('/landlords/<landlord_id>', methods = ["GET", "POST"])
+def landlord(landlord_id):
+
     form = LandlordReviewForm()
+    #if landlord_name not in database, display a message
+    if not LandlordReview.objects(landlord_id = landlord_id):
+        return render_template("index.html")
     
-    #show a form that lets the user rate the current landlord
-    return render_template('landlord.html')
+    #get the name of the landlord somehow
+
+    reviews = LandlordReview.objects(landlord_id=landlord_id)
+    review = reviews.first()
+    landlord_name = review.landlord_name
+
+    return render_template("landlord.html", reviews=reviews, landlord_name = landlord_name, form = form)
 
 
 @landlords.route('/about', methods = ["GET", "POST"])
@@ -41,3 +51,5 @@ def about():
     form = LandlordReviewForm()
  
     return render_template('about.html')
+
+
