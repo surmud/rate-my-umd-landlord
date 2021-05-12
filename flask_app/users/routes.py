@@ -11,21 +11,23 @@ users = Blueprint("users", __name__)
 #add more strict password requirements as discussed in specifications
 #account html template has to to be fixed, only want to let them change their password or username
 
-@users.route('/users/<username>')
+@users.route('/users/<username>', methods=['GET', 'POST'])
+@login_required
 def account(username):
     username_form = UpdateUsernameForm()
     password_form = UpdatePasswordForm()
 
     if username_form.validate_on_submit():
+        print(current_user.username)
         current_user.modify(username=username_form.username.data)
         current_user.save()
-        return redirect(url_for('users.account'))
+        return redirect(url_for('users.account', username=current_user.username))
 
     if password_form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(password_form.password.data).decode("utf-8")
         current_user.modify(password=hashed)
         current_user.save()
-        return redirect(url_for('users.account'))
+        return redirect(url_for('users.account', username=current_user.username))
 
     return render_template('account.html', username_form=username_form, password_form=password_form)
 

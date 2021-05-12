@@ -2,23 +2,19 @@
 {% block content %}
 <div class="row">
     <div class="col">
-        <h2>Registration</h2>
+        <h2 class="text-center">Registration</h2>
     </div>
 </div>
 <div class="row">
     <div class="col">
-      <h3> Login if you already have an account. </h3>
+      <h6 class="text-center"><a href="{{ url_for('users.login')}}">Login</a> if you already have an account. </h6>
         {# Ask the user to login if they already have an account #}
     </div>
 </div>
 <!-- Registration Form: -->
-<div class="row">
     <div class="col">
       {% if current_user.is_authenticated %}
-        <h1> Welcome {{ current_user.username }}! </h1>
-        {%endif %}
-      {% if not current_user.is_authenticated %}
-        <h2> Try entering your username and password again. </h2>
+        <h1 class="text-center"> Welcome {{ current_user.username }}! </h1>
         {%endif %}
     </div>
     <form action="" method="post">
@@ -71,6 +67,5 @@
           {{ form.submit(class="form-control form-control-lg") }}
       </div>
   </form>
-</div>
 
 {% endblock %}

@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, IntegerField
 from wtforms.fields.simple import SubmitField
 from wtforms.validators import InputRequired, Length, NumberRange, length, ValidationError, Email, EqualTo
+import re
 from .models import User
 
 class SearchForm(FlaskForm):
@@ -38,7 +39,7 @@ class CurrentLandlordReviewForm(FlaskForm):
 class RegisterForm(FlaskForm):
     username = StringField("Enter a username:", validators=[InputRequired(), Length(min=1, max=32)])
     email = StringField("Enter your email:", validators=[InputRequired(), Email()])
-    password = PasswordField("Enter a password:", validators=[InputRequired()])
+    password = PasswordField("Enter a password:", validators=[InputRequired(), Length(min=5, max=32)])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired(), EqualTo("password")])
     submit = SubmitField("Sign up")
 
@@ -46,6 +47,13 @@ class RegisterForm(FlaskForm):
         user = User.objects(username=username.data).first()
         if user is not None:
             raise ValidationError("Username is taken")
+    
+    def validate_password(self, password):
+        upp_char = any(ele.isupper() for ele in password.data)
+        regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+        spec_char = regex.search(password.data) == None
+        if (not upp_char) or spec_char:
+            raise ValidationError("Password must contain an uppercase character and a special character")
 
     def validate_email(self, email):
         user = User.objects(email=email.data).first()
@@ -59,7 +67,7 @@ class LoginForm(FlaskForm):
 
 class UpdateUsernameForm(FlaskForm):
     username = StringField("Enter your new username:", validators=[InputRequired(), Length(min=1, max=32)])
-    submit = SubmitField("Change Password")
+    submit = SubmitField("Change Username")
 
     def validate_username(self, username):
         user = User.objects(username=username.data).first()
