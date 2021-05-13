@@ -32,8 +32,8 @@ def create_app(test_config=None):
         'script-src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
     }
 
-    if test_config is not None:
-        app.config.update(test_config)
+    #if test_config is not None:
+     #   app.config.update(test_config)
 
     db.init_app(app)
     login_manager.init_app(app)
