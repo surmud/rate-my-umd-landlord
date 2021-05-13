@@ -1,8 +1,7 @@
-from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, IntegerField
 from wtforms.fields.simple import SubmitField
-from wtforms.validators import InputRequired, Length, NumberRange, length, ValidationError, Email, EqualTo
+from wtforms.validators import InputRequired, Length, NumberRange, ValidationError, Email, EqualTo
 import re
 from .models import User
 
@@ -78,4 +77,3 @@ class UpdatePasswordForm(FlaskForm):
     password = PasswordField("Enter a new password:", validators=[InputRequired()])
     submit = SubmitField("Change Password")
 
-#note: I copied and pasted the forms file from p3. We can use this as a model maybe

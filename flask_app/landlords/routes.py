@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, url_for, redirect, request, flash
+from flask import Blueprint, render_template, redirect, request
 from ..forms import LandlordReviewForm, CurrentLandlordReviewForm
 from ..models import LandlordReview
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import current_user
 import numpy as np #use np to find unique values of list
 
 landlords = Blueprint("landlords", __name__)

@@ -1,20 +1,14 @@
 # 3rd-party packages
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 from flask_mongoengine import MongoEngine
 from flask_login import (
     LoginManager,
-    current_user,
-    login_user,
-    logout_user,
-    login_required,
 )
 from flask_talisman import Talisman
 from flask_bcrypt import Bcrypt
-from werkzeug.utils import secure_filename
 
 # stdlib
 from datetime import datetime
-import os
 
 
 db = MongoEngine()
@@ -36,7 +30,6 @@ def create_app(test_config=None):
     }
 
     app.config.from_pyfile("config.py", silent=False)
-    #app.config["MONGODB_HOST"] = os.getenv("MONGODB_HOST")
     if test_config is not None:
         app.config.update(test_config)
 

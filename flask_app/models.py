@@ -1,8 +1,5 @@
 from flask_login import UserMixin
-from datetime import datetime
 from . import db, login_manager
-from . import config
-import base64
 
 
 @login_manager.user_loader
@@ -15,7 +12,6 @@ class User(db.Document, UserMixin):
     email = db.EmailField(required=True, unique=True)
     password = db.StringField(required=True)
 
-    # Returns unique string identifying our object
     def get_id(self):
         return self.username
 
