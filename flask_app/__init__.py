@@ -8,6 +8,7 @@ from flask_login import (
     logout_user,
     login_required,
 )
+from flask_talisman import Talisman
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
 
@@ -30,6 +31,10 @@ def page_not_found(e):
 def create_app(test_config=None):
     app = Flask(__name__)
 
+    csp = {
+        'default-src': '\'self\''
+    }
+
     app.config.from_pyfile("config.py", silent=False)
     #app.config["MONGODB_HOST"] = os.getenv("MONGODB_HOST")
     if test_config is not None:
@@ -38,6 +43,8 @@ def create_app(test_config=None):
     db.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)
+
+    Talisman(app, content_security_policy=csp)
 
     app.register_blueprint(main)
     app.register_blueprint(users)
