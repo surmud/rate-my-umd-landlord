@@ -25,13 +25,13 @@ def page_not_found(e):
 
 def create_app(test_config=None):
     app = Flask(__name__)
+    #app.config.from_pyfile("config.py", silent=False)
     app.config["MONGODB_HOST"] = os.getenv("MONGODB_HOST")
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+    app.config["SECRET_KEY"] = b'\x020;yr\x91\x11\xbe"\x9d\xc1\x14\x91\xadf\xec'
     csp = {
         'script-src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
     }
 
-    #app.config.from_pyfile("config.py", silent=False)
     if test_config is not None:
         app.config.update(test_config)
 
@@ -47,5 +47,5 @@ def create_app(test_config=None):
     app.register_error_handler(404, page_not_found)
 
     login_manager.login_view = "users.login"
-
+    
     return app
