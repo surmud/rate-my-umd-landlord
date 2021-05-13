@@ -26,6 +26,7 @@ def page_not_found(e):
 def create_app(test_config=None):
     app = Flask(__name__)
     app.config["MONGODB_HOST"] = os.getenv("MONGODB_HOST")
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     csp = {
         'script-src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
     }
