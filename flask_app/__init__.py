@@ -30,7 +30,7 @@ def create_app(test_config=None):
         'script-src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
     }
 
-    app.config.from_pyfile("config.py", silent=False)
+    #app.config.from_pyfile("config.py", silent=False)
     if test_config is not None:
         app.config.update(test_config)
 
