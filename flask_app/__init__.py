@@ -26,7 +26,7 @@ def create_app(test_config=None):
     app = Flask(__name__)
 
     csp = {
-        'default-src': '\'self\''
+        'script-src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
     }
 
     app.config.from_pyfile("config.py", silent=False)
