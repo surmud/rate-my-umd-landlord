@@ -16,7 +16,7 @@ db = MongoEngine()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 
-from .routes import main
+
 from .users.routes import users
 from .landlords.routes import landlords
 
@@ -38,10 +38,10 @@ def create_app():
 
     Talisman(app, content_security_policy=csp)
 
-    app.register_blueprint(main)
+    
     app.register_blueprint(users)
     app.register_blueprint(landlords)
-    app.register_error_handler(404, page_not_found)
+
 
     login_manager.login_view = "users.login"
     
