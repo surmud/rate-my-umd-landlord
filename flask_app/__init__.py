@@ -26,6 +26,8 @@ def page_not_found(e):
 def create_app():
     app = Flask(__name__)
     #app.config.from_pyfile("config.py", silent=False)
+    
+    #to run app locally, export the MONGODB_HOST Variable in terminal
     app.config["MONGODB_HOST"] = os.getenv("MONGODB_HOST")
     app.config["SECRET_KEY"] = b'\x020;yr\x91\x11\xbe"\x9d\xc1\x14\x91\xadf\xec'
     csp = {
