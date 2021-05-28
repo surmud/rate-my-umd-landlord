@@ -3,7 +3,7 @@
 
 
 <div class="jumbotron">
-    <h1 class="display-4">Welcome to Rate My UMD Landlord! <img class = "propic" src="../static/testudo.png" alt="pic1"></h1>
+    <h1 class="display-4">Welcome to Rate My UMD Landlord! </h1>
     <p class="lead">This is a simple website that allows students to rate and review landlords from College Park, Maryland. This web application
       was created by Surmud Jamil, Aashray Raparla, and Eric Qian, as a final project for CMSC388J at the University of Maryland. This project
       was made using the Flask framework in Python. To learn more about us, see our About page.
@@ -73,7 +73,8 @@
 
   
   </style>
-  <h2>Recent Landlord Reviews</h2>
+  
+  <h2><img class = "propic" src="../static/testudo_copy.png" alt="pic2"> Recent Landlord Reviews</h2>
   <hr>
   {%for review in reviews%}
   <div class="media">
@@ -95,6 +96,7 @@
   <hr>
   <br>
   {%endfor%}
+  
   {% if current_user.is_authenticated %}
   <h3>Leave Your Review</h3>
   <form action="" method="POST">
@@ -173,6 +175,7 @@
     </div>
     <!-- <button type="submit" class="btn btn-primary">Register Now</button> -->
   </form>
+  
 </section>
 
 
