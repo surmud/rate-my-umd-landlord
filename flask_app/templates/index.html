@@ -74,7 +74,7 @@
   
   </style>
   
-  <h2><img class = "propic" src="../static/testudo_copy.png" alt="pic2"> Recent Landlord Reviews</h2>
+  <h2> Recent Landlord Reviews</h2>
   <hr>
   {%for review in reviews%}
   <div class="media">
@@ -179,6 +179,7 @@
 </section>
 
 
-
+{%else%}
+<ps style="font-size: 20px"><img class = "propic" src="../static/testudo_copy.png" alt="pic2"> Want to leave your own review? Go ahead and create an account with us!</ps>
 {%endif%}
 {% endblock %}
