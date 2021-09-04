@@ -1,5 +1,4 @@
-# rate-my-umd-landlord
-This is the final project for CMSC388J, a website that allows students from the University of Maryland to rate their college park landlords.
+# Rate My UMD Landlord
+This is a web application developed using the flask framework that allows college students from the University of Maryland to post reviews of their landlords.
 
-This project was created using flask. The link to the final website is [https://ratemyumdlandlord.herokuapp.com/](https://ratemyumdlandlord.herokuapp.com/). 
-Please check it out and let me know what you think.
+The link to the deployed web application is [https://ratemyumdlandlord.herokuapp.com/](https://ratemyumdlandlord.herokuapp.com/). 
